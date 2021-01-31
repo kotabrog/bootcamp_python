@@ -1,0 +1,5 @@
+pip list --format freeze
+pip list --format freeze
+pip show numpy
+pip search tesseract
+pip freeze > requirements.txt
