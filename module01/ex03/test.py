@@ -14,11 +14,11 @@ from matrix import Matrix
 
 b = Matrix([[1, 2, 3], [3, 4, 5]])
 c = Matrix([[2, 4, 6], [6, 8, 10]])
-c = Matrix([[2, 0, 6], [6, 8, 10]])
+# c = Matrix([[2, 0, 6], [6, 8, 10]])
 # c = Matrix([[1, 2], [3, 4], [5, 6]])
 # c = Matrix([[2, 4], [6, 8]])
 # b = Matrix([[2, 4], [6, 8]])
-# c = Matrix([[3]])
+c = Matrix([[3]])
 # c = Matrix([[0]])
 # b = Matrix([[3]])
 # b = Matrix([[0]])

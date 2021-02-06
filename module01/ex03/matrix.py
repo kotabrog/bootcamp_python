@@ -30,13 +30,13 @@ class Matrix:
                 if len(arg1) == 0 or len(arg1[0]) == 0:
                     raise MatrixError('list must not be empty.')
                 self.shape = (len(arg1), len(arg1[0]))
-                if arg2 != None and arg2 != self.shape:
-                    raise MatrixError('If you specify list and shape, '\
+                if arg2 and arg2 != self.shape:
+                    raise MatrixError('If you specify list and shape, '
                                       + 'make sure to match the shap.')
                 self.data = []
                 for row in arg1:
                     if len(row) != len(arg1[0]):
-                        raise MatrixError('The size of all lists '\
+                        raise MatrixError('The size of all lists '
                                           + 'within a list is the same.')
                     self.data.append([float(e) for e in row])
             elif type(arg1) is tuple:
@@ -45,7 +45,7 @@ class Matrix:
                 if type(arg1[0]) is not int or type(arg1[1]) is not int:
                     raise MatrixError('Tuple elements are int only')
                 if arg1[0] < 1 or arg1[1] < 1:
-                    raise MatrixError('shape should be a value '\
+                    raise MatrixError('shape should be a value '
                                       + 'greater than or equal to 1')
                 self.data = [[float(0)] * arg1[1] for i in range(arg1[0])]
                 self.shape = (arg1[0], arg1[1])
@@ -72,11 +72,11 @@ class Matrix:
         try:
             if mode == '+':
                 if self.shape != matrix.shape:
-                    raise MatrixError('For this operator, '\
+                    raise MatrixError('For this operator, '
                                       + 'match the matrix shape')
             elif mode == '*':
                 if self.shape[1] != matrix.shape[0]:
-                    raise MatrixError('For this operator, '\
+                    raise MatrixError('For this operator, '
                                       + 'the shape is not correct')
             else:
                 raise MatrixError('The mode is wrong.')
@@ -87,7 +87,7 @@ class Matrix:
     def _add_matrix(self, matrix):
         try:
             if type(matrix) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             self._size_check(matrix)
             data = [[self.data[i][j] + matrix.data[i][j]
@@ -129,7 +129,7 @@ class Matrix:
     def _multi_matrix(self, matrix):
         try:
             if type(matrix) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             if self.shape == (1, 1):
                 return matrix._multi_scalar(self.data[0][0])
@@ -154,7 +154,7 @@ class Matrix:
     def __sub__(self, right):
         try:
             if type(right) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             return self._add_matrix(right._multi_scalar(-1))
         except MatrixError as e:
@@ -170,7 +170,7 @@ class Matrix:
     def __rmul__(self, left):
         try:
             if type(left) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             return left._multi_matrix(self)
         except MatrixError as e:
@@ -180,7 +180,7 @@ class Matrix:
     def __truediv__(self, right):
         try:
             if type(right) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             if self.shape == (1, 1):
                 return right._rdiv_scalar(self.data[0][0])
@@ -202,7 +202,7 @@ class Matrix:
     def __rtruediv__(self, left):
         try:
             if type(left) is not Matrix:
-                raise MatrixError('Operand that does not '\
+                raise MatrixError('Operand that does not '
                                   + 'support this operator.')
             if left.shape == (1, 1):
                 return self._rdiv_scalar(left.data[0][0])
