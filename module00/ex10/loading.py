@@ -30,7 +30,7 @@ class Progress:
               + 'elapsed time {:.2f}'.format(self.elapsed), end='')
 
     def print_end(self):
-        print('\rETA: 0.00s [100%][=======================>] '
+        print('\rETA: 0.00s [100%][========================] '
               + '{}/{} | '.format(self.count, self.lst_len)
               + 'elapsed time {:.2f}s'.format(self.elapsed))
 
